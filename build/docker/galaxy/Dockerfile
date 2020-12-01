@@ -16,7 +16,7 @@
 
 ## global scope TARGETPLATFORM
 ## ref: https://docs.docker.com/engine/reference/builder/#automatic-platform-args-in-the-global-scope
-FROM --platform=${TARGETPLATFORM} golang:1.14.2 AS builder
+FROM --platform=${TARGETPLATFORM} golang:1.15.4 AS builder
 ARG TARGETPLATFORM
 RUN echo "building for ${TARGETPLATFORM}"
 ARG WORKDIR="/go/src/tkestack.io/galaxy/"
@@ -42,5 +42,5 @@ LABEL description="This Dockerfile is written for galaxy"
 WORKDIR /root/
 RUN yum install -y iproute iptables ipset
 COPY --from=builder host-local loopback /opt/cni/galaxy/bin/
-COPY --from=builder galaxy-k8s-sriov galaxy-k8s-vlan galaxy-underlay-veth galaxy-bridge galaxy-flannel galaxy-veth galaxy-sdn tke-route-eni /opt/cni/galaxy/bin/
+COPY --from=builder galaxy-veth-host galaxy-k8s-sriov galaxy-k8s-vlan galaxy-underlay-veth galaxy-bridge galaxy-flannel galaxy-veth galaxy-sdn tke-route-eni /opt/cni/galaxy/bin/
 COPY --from=builder galaxy /usr/bin/

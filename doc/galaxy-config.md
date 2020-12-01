@@ -13,9 +13,10 @@ Galaxy support multiple default networks and configures them to pods according t
     {"name":"tke-route-eni", "type":"tke-route-eni", "eni":"eth1", "routeTable":1},
     {"name":"galaxy-flannel", "type":"galaxy-flannel", "delegate":{"type":"galaxy-veth"}, "subnetFile":"/run/flannel
 /subnet.env"},
-    {"name":"galaxy-k8s-vlan", "type":"galaxy-k8s-vlan", "device":"eth1", "default_bridge_name": "br0"},
+    {"name":"galaxy-k8s-vlan", "type":"galaxy-k8s-vlan", "device":"eth1", "default_bridge_name": "br0", "mtu": 1500},
     {"name": "galaxy-k8s-sriov", "type": "galaxy-k8s-sriov", "device": "eth1", "vf_num": 10},
-    {"name":"galaxy-underlay-veth", "type":"galaxy-underlay-veth", "device":"eth1"}
+    {"name":"galaxy-underlay-veth", "type":"galaxy-underlay-veth", "device":"eth1"},
+    {"name":"galaxy-veth-host","type": "galaxy-veth-host", "serviceCidr": "11.1.252.0/22", "hostInterface": "eth0", "containerInterface": "veth0","ipMasq": true}
   ],
   "DefaultNetworks": ["galaxy-flannel"],
   "ENIIPNetwork": "galaxy-k8s-vlan"

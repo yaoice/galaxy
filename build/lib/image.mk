@@ -73,7 +73,7 @@ image.build.%:
 	$(eval IMAGE_PLAT := $(subst _,/,$(PLATFORM)))
 	$(eval IMAGE_NAME := $(REGISTRY_PREFIX)/$(IMAGE)-$(ARCH):$(VERSION))
 	@echo "===========> Building docker image $(IMAGE) $(VERSION) for $(IMAGE_PLAT)"
-	$(DOCKER) buildx build --platform $(IMAGE_PLAT) --load -t $(IMAGE_NAME) $(_DOCKER_BUILD_EXTRA_ARGS) \
+	$(DOCKER) buildx build --network=host --no-cache --platform $(IMAGE_PLAT) --load -t $(IMAGE_NAME) $(_DOCKER_BUILD_EXTRA_ARGS) \
 	 -f $(ROOT_DIR)/build/docker/$(IMAGE)/Dockerfile $(ROOT_DIR)
 
 .PHONY: image.push

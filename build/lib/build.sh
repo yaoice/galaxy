@@ -52,7 +52,7 @@ function build::galaxy() {
   echo "Building plugins"
 
   # build galaxy cni plugins
-  PLUGINS="${PKG}/cni/k8s-vlan ${PKG}/cni/sdn ${PKG}/cni/veth ${PKG}/cni/k8s-sriov ${PKG}/cni/underlay/veth"
+  PLUGINS="${PKG}/cni/k8s-vlan ${PKG}/cni/sdn ${PKG}/cni/veth ${PKG}/cni/k8s-sriov ${PKG}/cni/underlay/veth ${PKG}/cni/veth-host"
   for d in ${PLUGINS}; do
     plugin_dir=${d#"${PKG}/cni/"}
     plugin=${plugin_dir//"/"/"-"}
